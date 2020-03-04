@@ -30,3 +30,27 @@
 *.exe
 *.out
 *.app
+
+
+# WAF
+.lock-waf*
+.waf*
+build/
+dist/
+wheelhouse/
+venv/
+.tox/
+
+# Python
+/include/
+/lib/
+/bin/
+
+.idea/
+.ipynb_checkpoints/
+
+# IDEs
+.vscode
+
+# Ignore .ss folders
+*.ss/
