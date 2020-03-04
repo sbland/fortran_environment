@@ -35,6 +35,7 @@
 # WAF
 .lock-waf*
 .waf*
+waf*/
 build/
 dist/
 wheelhouse/
