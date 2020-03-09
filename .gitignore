@@ -55,3 +55,5 @@ venv/
 
 # Ignore .ss folders
 *.ss/
+
+venv
