@@ -44,10 +44,10 @@ This is the instructions for running without docker on windows
   - assuming your directory for MinGW is the default "C:\MinGW", setup your PATH environment variable to include "C:\MinGW\bin"  && "C:\MinGW\msys\1.0\bin"
   - Check this is working by opening cmd or powershell and typing "make -h". This should give you some options for the make command
 - **Git For windows** - https://git-scm.com/download/win
- - This provides access to git bash
+  - This provides access to git bash
 - **Python 2.7** - https://www.python.org/downloads/release/python-2717/
- - Add python to your environment variables "C:/Python27". Make sure to rename python.exe to python2.exe
- - Add pip to your environment variables "C:/Python27/Scripts"
+  - Add python to your environment variables "C:/Python27". Make sure to rename python.exe to python2.exe
+  - Add pip to your environment variables "C:/Python27/Scripts"
 - **Python Virtual Env** - Install python2 virtual env `python2 -m pip install --user virtualenv`
 
 Note: Ensure you reopen command panels after editing PATH Vars
