@@ -16,6 +16,9 @@ You will need docker in order to create a virtual environment to run the fortran
 ## Windows 
 https://docs.docker.com/docker-for-windows/
 
+## Windows (Home edition)
+Note: May require enabling virtualization in the bios.
+https://docs.docker.com/toolbox/toolbox_install_windows/
 
 ## Ubuntu
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
