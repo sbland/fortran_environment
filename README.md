@@ -64,3 +64,8 @@ Note: Ensure you reopen command panels after editing PATH Vars
 
 # Testing
 Testing is setup with pFUnit https://github.com/Goddard-Fortran-Ecosystem/pFUnit
+
+To run tests with docker:
+1. Setup the src directory with your tests as in pFUnit documentation. The current setup uses a modification of the Trivial example here: https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos/tree/master/Trivial
+2. Build the container `docker build . -f dockerfile-testspf -t fortran_environment_testspf`
+3. Run the container `docker run -it fortran_environment_testspf`
