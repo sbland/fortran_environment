@@ -7,6 +7,9 @@ A base setup for a fortran environment with compiler, testing etc
 
 
 # Info
+## Licences for externals
+pFUnit Licence - https://github.com/Goddard-Fortran-Ecosystem/pFUnit/blob/master/LICENSE
+
 ## WAF Build Tool
 The Fortran code is built using the Waf\_ build tool. This requires
 Python 2.5 or newer (including 3.x) to be available. If any errors with
@@ -60,12 +63,13 @@ Note: Ensure you reopen command panels after editing PATH Vars
 ### Setup
 1. From `git bash` Create the python virtual environment `python2 -m virtualenv venv` and activate `. ./venv/scripts/activate`. When Activated you should now have `(venv)` at the start of the current path in the command line
 
-### Test run
+### Demo run
 1. With the environment activated run `python waf configure` followed by `python waf build`
 2. You should now have a run_model.exe file in the build folder. Run this in bash/cmd and you should see `hello world` as a response 
 
 # Testing
 Testing is setup with pFUnit https://github.com/Goddard-Fortran-Ecosystem/pFUnit
+
 
 To run tests with docker:
 1. Setup the src directory with your tests as in pFUnit documentation. The current setup uses a modification of the Trivial example here: https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos/tree/master/Trivial
