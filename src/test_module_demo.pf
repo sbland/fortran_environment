@@ -1,0 +1,13 @@
+@test
+subroutine test_module_demo()
+  use module_demo
+  use funit
+
+  integer :: arg1 = 1
+  integer ::  arg2
+
+  call ra(arg1, arg2)
+
+  @assertEqual(3, arg2, 'module_demo')
+   
+end subroutine test_module_demo

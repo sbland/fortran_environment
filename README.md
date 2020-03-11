@@ -61,3 +61,6 @@ Note: Ensure you reopen command panels after editing PATH Vars
 ### Test run
 1. With the environment activated run `python waf configure` followed by `python waf build`
 2. You should now have a run_model.exe file in the build folder. Run this in bash/cmd and you should see `hello world` as a response 
+
+# Testing
+Testing is setup with pFUnit https://github.com/Goddard-Fortran-Ecosystem/pFUnit
