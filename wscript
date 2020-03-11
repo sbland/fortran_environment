@@ -8,6 +8,20 @@ APPNAME = 'fortran-environment'
 if 'PREFIX' not in os.environ:
     os.environ['PREFIX'] = '.'
 
+
+
+FCFLAGS = {}
+FCFLAGS['GFORTRAN'] = '-Wall -Wextra -Wimplicit-interface -fimplicit-none -fPIC'.split()
+FCFLAGS['GFORTRAN_debug'] = '-O0 -fmax-errors=1 -g -fcheck=all -fbacktrace'.split()
+FCFLAGS['GFORTRAN_release'] = '-O2'.split()
+FCFLAGS['IFORT'] = '-warn all -implicitnone -fpic'.split()
+FCFLAGS['IFORT_debug'] = '-check all'.split()
+FCFLAGS['IFORT_release'] = '-fast'.split()
+
+
+def _flags_for_variant(compiler, variant):
+    return FCFLAGS.get(compiler, []) + FCFLAGS.get(compiler + '_' + variant, [])
+
 # Defines WAF options - https://waf.io/apidocs/Options.html
 def options(ctx):
     # load compiler libraries (Adds commands to ctx)
@@ -25,6 +39,12 @@ def configure(ctx):
 
     # Compiles a sample Fortran program to ensure that the settings are correct
     ctx.check_fortran()
+
+    conf.start_msg('Using build variant')
+    conf.end_msg(conf.options.variant)
+    conf.env.FCFLAGS = conf.env.FCFLAGS or _flags_for_variant(conf.env.FC_NAME, conf.options.variant)
+    conf.start_msg('FCFLAGS')
+    conf.end_msg(' '.join(conf.env.FCFLAGS))
 
 def build(ctx):
     print('Building')
