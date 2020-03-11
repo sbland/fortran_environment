@@ -72,3 +72,10 @@ To run tests with docker:
 2. Build the container `docker build . -f dockerfile-testspf -t fortran_environment_testspf`
 3. Run the container `docker run -it fortran_environment_testspf bash`
 4. From inside the container run the tests `cd src && make all ./my_tests && ./my_tests`
+
+# Using local/portable docker version
+This setup allows you to pre built the docker container then run it on any project folder
+
+1. Setup the src directory with your tests as in pFUnit documentation. The current setup uses a modification of the Trivial example here: https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos/tree/master/Trivial
+2. Build the container (Only needs running once) `docker build . -f dockerfile-testspf-local -t fortran_environment_test_local`
+3. Run the container `docker run -it -v <full path to your project root>:/app fortran_environment_test_local`
