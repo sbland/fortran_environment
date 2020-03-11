@@ -1,6 +1,8 @@
 **fortran_environment**
 -----------------------
 
+**VERSION 0.1.0**
+
 A base setup for a fortran environment with compiler, testing etc
 
 
