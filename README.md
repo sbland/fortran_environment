@@ -5,6 +5,7 @@
 
 A base setup for a fortran environment with compiler, testing etc
 
+**NOTE**: This is a WIP and contributions are welcome
 
 # Info
 ## Licences for externals
