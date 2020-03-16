@@ -84,3 +84,9 @@ This setup allows you to pre built the docker container then run it on any proje
 1. Setup the src directory with your tests as in pFUnit documentation. The current setup uses a modification of the Trivial example here: https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos/tree/master/Trivial
 2. Build the container (Only needs running once) `docker build . -f dockerfile-testspf-local -t fortran_environment_test_local`
 3. Run the container `docker run -it -v <full path to your project root>:/app fortran_environment_test_local`
+
+
+# Troubleshooting
+- `/bin/sh: 1: /app/build_and_run_tests.sh: not found` 
+  - check that you have mapped the current directory correctly to the volume e.g. `docker run ... -v /c:/projects/fortran_environment:/app ...`. 
+  - Also make sure that you have enabled file sharing of your local drive in the docker settings on windows
