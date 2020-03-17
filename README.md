@@ -14,12 +14,13 @@ pFUnit Licence - https://github.com/Goddard-Fortran-Ecosystem/pFUnit/blob/master
 ## WAF Build Tool
 The Fortran code is built using the Waf\_ build tool. This requires
 Python 2.5 or newer (including 3.x) to be available. If any errors with
-waf check if update needed (See troubleshooting at bottom). 
+waf check if update needed (See troubleshooting at bottom).
 
 # Environment Setup (DOCKER)
 You will need docker in order to create a virtual environment to run the fortran model
+You also need clone pfUnit and its submodules `cd vendor/` && `git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git --recursive`
 
-## Windows 
+## Windows
 https://docs.docker.com/docker-for-windows/
 
 ## Windows (Home edition)
@@ -66,7 +67,7 @@ Note: Ensure you reopen command panels after editing PATH Vars
 
 ### Demo run
 1. With the environment activated run `python waf configure` followed by `python waf build`
-2. You should now have a run_model.exe file in the build folder. Run this in bash/cmd and you should see `hello world` as a response 
+2. You should now have a run_model.exe file in the build folder. Run this in bash/cmd and you should see `hello world` as a response
 
 # Testing
 Testing is setup with pFUnit https://github.com/Goddard-Fortran-Ecosystem/pFUnit
@@ -87,6 +88,6 @@ This setup allows you to pre built the docker container then run it on any proje
 
 
 # Troubleshooting
-- `/bin/sh: 1: /app/build_and_run_tests.sh: not found` 
-  - check that you have mapped the current directory correctly to the volume e.g. `docker run ... -v /c:/projects/fortran_environment:/app ...`. 
+- `/bin/sh: 1: /app/build_and_run_tests.sh: not found`
+  - check that you have mapped the current directory correctly to the volume e.g. `docker run ... -v /c:/projects/fortran_environment:/app ...`.
   - Also make sure that you have enabled file sharing of your local drive in the docker settings on windows
