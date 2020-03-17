@@ -8,23 +8,22 @@
 FROM ubuntu
 
 # Setup dependencis
-RUN apt-get update
-RUN apt-get install -qq \
+RUN apt-get update && apt-get install -qq \
     build-essential \
     pkg-config \
     gfortran \
     liblapack-dev
+
 # Add python
-RUN apt-get install -qq software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
-RUN apt-get install -qq python2.7
-RUN apt-get install -qq python3.7
+RUN apt-get update &&  apt-get install -qq software-properties-common
+RUN apt-get update &&  add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update && apt-get install -qq python2.7
+RUN apt-get update && apt-get install -qq python3.7
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Setup Test Framework
-RUN apt-get install -qq curl 
-RUN apt-get install -qq wget 
+RUN apt-get install -qq curl
+RUN apt-get install -qq wget
 
 
 ## update gfortran
@@ -57,7 +56,7 @@ RUN cd pFUnit && mkdir build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=/ven
 # TODO: remove || true when fixed hamcrest tests
 RUN cd pFUnit && cd build && make tests || true
 RUN cd pFUnit && cd build && make install
-# TODO: Fix line endings 
+# TODO: Fix line endings
 # file .../PFUNIT-4.1/bin/funitproc has incorrect line endings
 ENV PFUNIT_DIR=/vendor
 ENV PFUNIT=/vendor/PFUNIT-4.1/
