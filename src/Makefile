@@ -1,3 +1,4 @@
+# List of source files in build order - built left to right unless overriden below
 SRCS := module_demo.F90 module_demo_external.F90 
 OBJS := $(SRCS:%.F90=%.o)
 # FC set in env vars
@@ -20,7 +21,7 @@ FFLAGS += -I./
 libsut.a: $(OBJS)
 	$(AR) -r $@ $?
 
-# Set build order
+# Set build order - this forces module_demo_external to be built before module_demo
 module_demo.o: module_demo_external.mod
 module_demo_external.mod: module_demo_external.o
 
@@ -36,10 +37,10 @@ module_demo_external.mod: module_demo_external.o
 # **test_simple**
 test_simple_TESTS := test_module_demo.pf
 # test_simple_REGISTRY := 
-test_simple_OTHER_SOURCES := module_demo_external.F90 module_demo_external.mod
+# test_simple_OTHER_SOURCES := module_demo_external.F90 module_demo_external.mod
 test_simple_OTHER_LIBRARIES := -L. -lsut
 # test_simple_OTHER_LIBRARIES := -L../src -lsut
-test_simple_OTHER_INCS := module_demo_external.F90
+# test_simple_OTHER_INCS := module_demo_external.F90
  
 $(eval $(call make_pfunit_test,test_simple))
 
