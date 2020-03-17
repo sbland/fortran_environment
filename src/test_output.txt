@@ -1,0 +1,17 @@
+.F
+Time:         0.000 seconds
+  
+Failure
+ in: 
+test_module_demo_suite.test_module_demo
+  Location: 
+[test_module_demo.pf:11]
+module_demo
+AssertEqual failure:
+      Expected: <3>
+        Actual: <2>
+    Difference: <-1>
+  
+ FAILURES!!!
+Tests run: 1, Failures: 1, Errors: 0
+, Disabled: 0

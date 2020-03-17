@@ -16,33 +16,52 @@ The Fortran code is built using the Waf\_ build tool. This requires
 Python 2.5 or newer (including 3.x) to be available. If any errors with
 waf check if update needed (See troubleshooting at bottom).
 
-# Environment Setup (DOCKER)
-You will need docker in order to create a virtual environment to run the fortran model
+# Environment Setup (DOCKER) - Min
+This creates a minimal environment for running fortran
+
+## Dependencies
+You will need docker in order to create a virtual environment to run the fortran model. See the docker dependencies section below
 You also need clone pfUnit and its submodules `cd vendor/` && `git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git --recursive`
 
-## Windows
-https://docs.docker.com/docker-for-windows/
 
-## Windows (Home edition)
-Note: May require enabling virtualization in the bios.
-https://docs.docker.com/toolbox/toolbox_install_windows/
+## Build and Run
 
-## Ubuntu
-https://docs.docker.com/install/linux/docker-ce/ubuntu/
-
-# Build and Run
-
-## Build
+### Build
 
 Replace 'fortran_environment' with the name of your model
 ```
 docker build . -t fortran_environment
 ```
 
-## Run
+### Run
 Note can add args like 'abc' in example below
 ```
 docker run -it fortran_environment ./build/run_model abc
+```
+# Environment Setup (DOCKER) - Full
+This creates a full environment for running fortran with testing etc
+
+## Dependencies
+You will need docker in order to create a virtual environment to run the fortran model. See the docker dependencies section below
+You also need clone pfUnit and its submodules `cd vendor/` && `git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git --recursive`
+
+### Build
+
+Replace 'fortran_environment' with the name of your model
+```
+docker build . -t fortran_environment
+```
+
+### Run model
+
+```
+docker run -it -v <local path to project>:/app fortran_environment
+```
+
+### Run tests
+
+```
+docker run -it -v <local path to project>:/app fortran_environment ./build_and_run_tests.sh
 ```
 
 # Environment Setup (MANUAL)
@@ -85,6 +104,20 @@ This setup allows you to pre built the docker container then run it on any proje
 1. Setup the src directory with your tests as in pFUnit documentation. The current setup uses a modification of the Trivial example here: https://github.com/Goddard-Fortran-Ecosystem/pFUnit_demos/tree/master/Trivial
 2. Build the container (Only needs running once) `docker build . -f dockerfile-testspf-local -t fortran_environment_test_local`
 3. Run the container `docker run -it -v <full path to your project root>:/app fortran_environment_test_local`
+
+
+
+# Docker dependencies
+
+### Windows
+https://docs.docker.com/docker-for-windows/
+
+### Windows (Home edition)
+Note: May require enabling virtualization in the bios.
+https://docs.docker.com/toolbox/toolbox_install_windows/
+
+### Ubuntu
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 
 # Troubleshooting

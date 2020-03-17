@@ -3,7 +3,7 @@
 cd src && \
 make clean && \
 # make all ./test_simple && \
-make all TEST_MODE=1 && \
+make all && \
 # echo "fin"
-./modules/tests/test_simple > ./test_output.txt || true &&\
+./run || true &&\
 make clean
