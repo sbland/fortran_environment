@@ -107,6 +107,68 @@ This setup allows you to pre built the docker container then run it on any proje
 
 
 
+# Adding modules
+1. To create a new module add a folder to `src/modules`
+2. Inside the folder create your .F90 files and a `Makefile`. See the example src folder for an example of a makefile
+3. At the top of the Makefile you should add a list of all the .F90 files required for the module including dependencies first
+4. You should then add a line to the `build` path inside of `/src/modules/Makefile` like  `$(MAKE) -C <module_name> all`. and in the `clean` path add `$(MAKE) -C <module_name> clean`
+5. Note: the order of these is important
+
+# Adding tests
+Tests are created using the pFUnit test framework. The below is a simple example. Read the pFUnit docs for further info.
+## Adding a test to your module
+1. Inside your module directory create a new file called `<module_name>_test.pf` see examples or pFUnit documentation on how this should be setup
+2. Add to the makefile `include $(LATEST_PFUNIT_DIR)/include/PFUNIT.mk`
+3. Inside your module makefile you should include `FFLAGS += $(PFUNIT_EXTRA_FFLAGS)`
+4. You should also add any other module dependencies here like this: `FFLAGS += -I../constants` where `...constants` is the relative path from this makefile to another module directory
+5. Add your tests `<module_name>_TESTS := testa_test.pf testb_test.pf ` where `testa_test.pf` and `testb_test.pf` are the names of your tests
+6. Add the following `<module_name>_OTHER_LIBRARIES := -L../constants -L../config -lsut` where `-L../constants` are the relative paths to other modules
+7. Finally add `$(eval $(call make_pfunit_test,<module_name>_tests))`
+8. Inside of `/src/modules/Makefile` add your module to the testing path as so: `$(MAKE) -C <module_name> tests`
+
+Complete makefile:
+``` bash
+SRCS := \
+	../constants/Constants_ml.F90 \
+	model_ml.F90
+
+OBJS := $(SRCS:%.F90=%.o)
+
+all: libsut.a
+
+
+# Add any compile flags?
+FFLAGS += $(PFUNIT_EXTRA_FFLAGS)
+FFLAGS += -I../constants
+
+# Setup/compile library?
+libsut.a: $(OBJS)
+	$(AR) -r $@ $?
+
+
+# Tells make to Compile using FC compiler
+%.o : %.F90
+	$(FC) -c $(FFLAGS) $<
+
+# ==== ======================================================DEFINE TESTS ==== #
+# Define Tests and their dependencies
+tests: <module_name>
+# Get pFUnit
+include $(LATEST_PFUNIT_DIR)/include/PFUNIT.mk
+
+# **run_tests**
+<module_name>_tests_TESTS := testa_test.pf testb_test.pf
+<module_name>_tests_OTHER_LIBRARIES := -L../constants -L../config -lsut
+
+$(eval $(call make_pfunit_test,<module_name>_tests))
+
+
+# ==== CLEAN UP ==== #
+clean:
+	$(RM) *.o *.mod *.a *.inc *_tests *_test.F90
+
+```
+
 # Docker dependencies
 
 ### Windows
@@ -124,3 +186,4 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 - `/bin/sh: 1: /app/build_and_run_tests.sh: not found`
   - check that you have mapped the current directory correctly to the volume e.g. `docker run ... -v /c:/projects/fortran_environment:/app ...`.
   - Also make sure that you have enabled file sharing of your local drive in the docker settings on windows
+  - Make sure the line endings are set to LF not CLRF for `build_and_run_tests.sh`
