@@ -14,6 +14,9 @@ endif
 
 
 build_modules:
+ifndef ROOT_DIR
+	$(error ROOT_DIR is not set)
+endif
 	@echo ------------BUILD MODULES---------------------------------------------
 	$(MAKE) -C modules all
 
@@ -23,7 +26,6 @@ build_modules:
 build: build_modules
 	@echo ------------BUILDING PROGRAM---------------------------------------------
 	$(FC) -c $(FFLAGS) main.f90
-	# $(FC) $(FFLAGS) -o run main.f90 ./modules/module_demo/*.o ./modules/module_ext/*.o
 	$(FC) $(FFLAGS) -o ./run main.f90 $(OBJS)
 clean:
 	@echo -----------------CLEANING----------------------------------------
