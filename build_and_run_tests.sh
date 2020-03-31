@@ -1,8 +1,9 @@
 #!/bin/bash
+ROOT_DIR=$PWD
 
 cd src && \
 make clean && \
-make all TEST_MODE=1 ROOT_DIR=$PWD && \
+make all TEST_MODE=1 ROOT_DIR=$ROOT_DIR && \
 echo "----------------------- RUNNING TESTS -----------------------------"
 
 TESTS=$(find . -regex '.*_tests')
@@ -38,9 +39,11 @@ for TEST in $TESTS; do
 done
 # )
 
-
-make clean
-
+if [ "${DONT_CLEAN_UP}" = "TRUE" ]; then
+    echo "Skipping clean up"
+else
+    make clean
+fi
 echo "====================== RESULTS ======================="
 cat ./results.txt
 
