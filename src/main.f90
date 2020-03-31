@@ -8,5 +8,6 @@ program DO3SE_main
     print * , arg1
 
     call ra(1, arg2)
+    print *, arg2
 
 end program DO3SE_main

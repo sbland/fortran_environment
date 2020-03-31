@@ -8,7 +8,7 @@ subroutine test_module_demo()
 
   call ra(arg1, arg2)
 
-  @assertEqual(3, arg2, 'module_demo')
+  @assertEqual(2, arg2, 'module_demo')
   ! @assertEqual(2, arg2, 'module_demo')
 
 end subroutine test_module_demo

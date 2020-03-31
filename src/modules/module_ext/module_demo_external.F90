@@ -1,8 +1,11 @@
 module module_demo_external
     implicit none
 
+    private
+
+    public :: rab
 contains
-    subroutine rab(arg1,  arg2)
+    pure subroutine rab(arg1,  arg2)
         implicit none
         integer,intent(in) :: arg1
         integer,intent(out) ::  arg2
