@@ -2,8 +2,8 @@
 LATEST_PFUNIT_DIR := $(lastword $(shell echo $(wildcard $(PFUNIT_DIR)/PFUNIT-4.*) | xargs -n1 | sort -V))
 include $(LATEST_PFUNIT_DIR)/include/PFUNIT.mk
 FFLAGS += $(PFUNIT_EXTRA_FFLAGS)
-FFLAGS += -I../module_ext
 FFLAGS += -I../module_demo
+FFLAGS += -I../module_ext
 
 all: test_simple
 
