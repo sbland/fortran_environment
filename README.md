@@ -11,17 +11,14 @@ A base setup for a fortran environment with compiler, testing etc
 ## Licences for externals
 pFUnit Licence - https://github.com/Goddard-Fortran-Ecosystem/pFUnit/blob/master/LICENSE
 
-## WAF Build Tool
-The Fortran code is built using the Waf\_ build tool. This requires
-Python 2.5 or newer (including 3.x) to be available. If any errors with
-waf check if update needed (See troubleshooting at bottom).
 
 # Environment Setup (DOCKER) - Min
 This creates a minimal environment for running fortran
 
 ## Dependencies
 You will need docker in order to create a virtual environment to run the fortran model. See the docker dependencies section below
-You also need clone pfUnit and its submodules `cd vendor/` && `git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git --recursive`
+
+For testing you will need pfUnit and its submodules `cd vendor/` && `git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git --recursive`
 
 
 ## Build and Run

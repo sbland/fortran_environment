@@ -1,0 +1,29 @@
+FROM fortran_environment
+
+# # Copy vendor directory
+# TODO: This should pull from repository
+COPY ./vendor /vendor
+WORKDIR /vendor
+
+
+# Build fPUnit
+# TODO: Skip -DSKIP_FHAMCREST=YES due to `Exception: SegFault` in tests
+RUN cd pFUnit && mkdir build && cd build && cmake .. -DCMAKE_INSTALL_PREFIX=/vendor
+# TODO: remove || true when fixed hamcrest tests
+RUN cd pFUnit && cd build && make tests || true
+RUN cd pFUnit && cd build && make install
+# TODO: Fix line endings
+# file .../PFUNIT-4.1/bin/funitproc has incorrect line endings
+ENV PFUNIT_DIR=/vendor
+ENV PFUNIT=/vendor/PFUNIT-4.1/
+
+RUN sed -i.bak 's/\r$//' "${PFUNIT}bin/funitproc"
+
+WORKDIR /app
+
+
+# RUN TESTS
+
+CMD /app/build_and_run.sh
+
+
