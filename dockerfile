@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -qq \
     gdb \
     # Make
     make
-
+WORKDIR /app
 CMD make
 
 
